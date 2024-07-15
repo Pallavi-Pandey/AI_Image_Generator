@@ -12,9 +12,10 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-router.post('/', async (req, res) => {
-    res.send('Hello from OPENAI!');
-})
+
+router.route('/').get(async (req, res) => {
+    res.send('Hello from OpenAI!');
+});
 
 router.route('/').post(async (req, res) => {
     try{
@@ -33,7 +34,7 @@ router.route('/').post(async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.status(500).send(error?.response.data.error)
+        res.status(500).send(error?.response.data.error.message);
     }
 })
 
